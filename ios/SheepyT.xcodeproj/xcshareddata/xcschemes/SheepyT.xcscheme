@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1430"
+   LastUpgradeVersion = "1500"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C0D643AE29F99A7F004DDAA4"
-               BuildableName = "MLCChat.app"
-               BlueprintName = "MLCChat"
-               ReferencedContainer = "container:MLCChat.xcodeproj">
+               BuildableName = "SheepyT.app"
+               BlueprintName = "SheepyT"
+               ReferencedContainer = "container:SheepyT.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,8 +31,8 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Release"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       disableMainThreadChecker = "YES"
       disablePerformanceAntipatternChecker = "YES"
       launchStyle = "0"
@@ -48,9 +48,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C0D643AE29F99A7F004DDAA4"
-            BuildableName = "MLCChat.app"
-            BlueprintName = "MLCChat"
-            ReferencedContainer = "container:MLCChat.xcodeproj">
+            BuildableName = "SheepyT.app"
+            BlueprintName = "SheepyT"
+            ReferencedContainer = "container:SheepyT.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C0D643AE29F99A7F004DDAA4"
-            BuildableName = "MLCChat.app"
-            BlueprintName = "MLCChat"
-            ReferencedContainer = "container:MLCChat.xcodeproj">
+            BuildableName = "SheepyT.app"
+            BlueprintName = "SheepyT"
+            ReferencedContainer = "container:SheepyT.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

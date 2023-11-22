@@ -17,8 +17,8 @@
 		AEC27EFC2A85C3B000254E67 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC27EFB2A85C3B000254E67 /* AppConfig.swift */; };
 		AEC27EFE2A85C45700254E67 /* ExampleModelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC27EFD2A85C45700254E67 /* ExampleModelConfig.swift */; };
 		AEC27F022A86337E00254E67 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC27F012A86337E00254E67 /* Constants.swift */; };
-		C06A74F229F9A78800BC4BE6 /* dist in CopyFiles */ = {isa = PBXBuildFile; fileRef = C06A74E029F99C9F00BC4BE6 /* dist */; };
-		C09834192A16F4E000A05B51 /* app-config.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C09834182A16F4CB00A05B51 /* app-config.json */; };
+		C06A74F229F9A78800BC4BE6 /* dist in Copy Files */ = {isa = PBXBuildFile; fileRef = C06A74E029F99C9F00BC4BE6 /* dist */; };
+		C09834192A16F4E000A05B51 /* app-config.json in Copy Files */ = {isa = PBXBuildFile; fileRef = C09834182A16F4CB00A05B51 /* app-config.json */; };
 		C0D643B329F99A7F004DDAA4 /* MLCChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D643B229F99A7F004DDAA4 /* MLCChatApp.swift */; };
 		C0D643B729F99A80004DDAA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0D643B629F99A80004DDAA4 /* Assets.xcassets */; };
 		C0D643BA29F99A80004DDAA4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0D643B929F99A80004DDAA4 /* Preview Assets.xcassets */; };
@@ -29,15 +29,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C06A74F129F9A78000BC4BE6 /* CopyFiles */ = {
+		C06A74F129F9A78000BC4BE6 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				C09834192A16F4E000A05B51 /* app-config.json in CopyFiles */,
-				C06A74F229F9A78800BC4BE6 /* dist in CopyFiles */,
+				C09834192A16F4E000A05B51 /* app-config.json in Copy Files */,
+				C06A74F229F9A78800BC4BE6 /* dist in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C0D643CF29F99C5D004DDAA4 /* Embed Libraries */ = {
@@ -53,6 +54,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0ADE10772AFCCBB2003FB56A /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		0ADE10792AFD43A3003FB56A /* libcompression.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcompression.tbd; path = usr/lib/libcompression.tbd; sourceTree = SDKROOT; };
+		0ADE107C2AFD444E003FB56A /* liblz4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblz4.a; path = ../../../../../opt/homebrew/Cellar/lz4/1.9.4/lib/liblz4.a; sourceTree = "<group>"; };
 		1453A4CA2A1354B9001B909F /* StartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		1453A4CB2A1354B9001B909F /* ModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
 		1453A4CC2A1354B9001B909F /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -66,7 +70,7 @@
 		C06A74E029F99C9F00BC4BE6 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dist; sourceTree = "<group>"; };
 		C06A74E629F9A1DF00BC4BE6 /* MLCChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MLCChat.entitlements; sourceTree = "<group>"; };
 		C09834182A16F4CB00A05B51 /* app-config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "app-config.json"; sourceTree = "<group>"; };
-		C0D643AF29F99A7F004DDAA4 /* MLCChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLCChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0D643AF29F99A7F004DDAA4 /* SheepyT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepyT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0D643B229F99A7F004DDAA4 /* MLCChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLCChatApp.swift; sourceTree = "<group>"; };
 		C0D643B629F99A80004DDAA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0D643B929F99A80004DDAA4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -143,7 +147,7 @@
 		C0D643B029F99A7F004DDAA4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C0D643AF29F99A7F004DDAA4 /* MLCChat.app */,
+				C0D643AF29F99A7F004DDAA4 /* SheepyT.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,6 +179,9 @@
 		C0D643C929F99BDA004DDAA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0ADE107C2AFD444E003FB56A /* liblz4.a */,
+				0ADE10792AFD43A3003FB56A /* libcompression.tbd */,
+				0ADE10772AFCCBB2003FB56A /* libz.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -190,26 +197,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C0D643AE29F99A7F004DDAA4 /* MLCChat */ = {
+		C0D643AE29F99A7F004DDAA4 /* SheepyT */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C0D643BD29F99A80004DDAA4 /* Build configuration list for PBXNativeTarget "MLCChat" */;
+			buildConfigurationList = C0D643BD29F99A80004DDAA4 /* Build configuration list for PBXNativeTarget "SheepyT" */;
 			buildPhases = (
 				C0D643AB29F99A7F004DDAA4 /* Sources */,
 				C0D643AC29F99A7F004DDAA4 /* Frameworks */,
 				C0D643AD29F99A7F004DDAA4 /* Resources */,
 				C0D643CF29F99C5D004DDAA4 /* Embed Libraries */,
-				C06A74F129F9A78000BC4BE6 /* CopyFiles */,
+				C06A74F129F9A78000BC4BE6 /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MLCChat;
+			name = SheepyT;
 			packageProductDependencies = (
 				C0DDBE0C2A3BCD8000E9D060 /* MLCSwift */,
 			);
 			productName = MLCChat;
-			productReference = C0D643AF29F99A7F004DDAA4 /* MLCChat.app */;
+			productReference = C0D643AF29F99A7F004DDAA4 /* SheepyT.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -220,7 +227,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					C0D643AE29F99A7F004DDAA4 = {
 						CreatedOnToolsVersion = 14.3;
@@ -228,7 +235,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C0D643AA29F99A7F004DDAA4 /* Build configuration list for PBXProject "MLCChat" */;
+			buildConfigurationList = C0D643AA29F99A7F004DDAA4 /* Build configuration list for PBXProject "SheepyT" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -241,7 +248,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C0D643AE29F99A7F004DDAA4 /* MLCChat */,
+				C0D643AE29F99A7F004DDAA4 /* SheepyT */,
 			);
 		};
 /* End PBXProject section */
@@ -319,6 +326,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -379,6 +387,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -404,12 +413,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MLCChat/MLCChat.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MLCChat/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 3FR42MXLK9;
+				DEVELOPMENT_TEAM = VV9VCS7UWW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
@@ -421,6 +429,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,8 +437,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/lib",
+					/opt/homebrew/Cellar/lz4/1.9.4/lib,
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = (
 					"-Wl,-all_load",
 					"-lmodel_iphone",
@@ -439,10 +449,9 @@
 					"-lsentencepiece",
 					"-ltokenizers_c",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mlc.Chat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eponymous.SheepyT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "mlc-chat-iosappstore";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -462,7 +471,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MLCChat/Preview Content\"";
-				DEVELOPMENT_TEAM = 3FR42MXLK9;
+				DEVELOPMENT_TEAM = VV9VCS7UWW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
@@ -474,6 +483,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,8 +491,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/lib",
+					/opt/homebrew/Cellar/lz4/1.9.4/lib,
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = (
 					"-Wl,-all_load",
 					"-lmodel_iphone",
@@ -492,7 +503,7 @@
 					"-lsentencepiece",
 					"-ltokenizers_c",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mlc.Chat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eponymous.SheepyT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -505,7 +516,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C0D643AA29F99A7F004DDAA4 /* Build configuration list for PBXProject "MLCChat" */ = {
+		C0D643AA29F99A7F004DDAA4 /* Build configuration list for PBXProject "SheepyT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C0D643BB29F99A80004DDAA4 /* Debug */,
@@ -514,7 +525,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C0D643BD29F99A80004DDAA4 /* Build configuration list for PBXNativeTarget "MLCChat" */ = {
+		C0D643BD29F99A80004DDAA4 /* Build configuration list for PBXNativeTarget "SheepyT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C0D643BE29F99A80004DDAA4 /* Debug */,

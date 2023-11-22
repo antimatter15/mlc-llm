@@ -22,7 +22,7 @@ struct MessageData: Hashable {
 }
 
 final class ChatState: ObservableObject {
-    fileprivate enum ModelChatState {
+    enum ModelChatState {
         case generating
         case resetting
         case reloading
@@ -31,6 +31,7 @@ final class ChatState: ObservableObject {
         case failed
         case pendingImageUpload
         case processingImage
+        case starting
     }
 
     @Published var messages = [MessageData]()
@@ -39,7 +40,7 @@ final class ChatState: ObservableObject {
     @Published var useVision = false
     
     private let modelChatStateLock = NSLock()
-    private var modelChatState: ModelChatState = .ready
+    @Published var modelChatState: ModelChatState = .starting
 
     private let threadWorker = ThreadWorker()
     private let chatModule = ChatModule()
@@ -50,6 +51,7 @@ final class ChatState: ObservableObject {
     init() {
         threadWorker.qualityOfService = QualityOfService.userInteractive
         threadWorker.start()
+        
     }
     
     var isInterruptible: Bool {
@@ -57,6 +59,7 @@ final class ChatState: ObservableObject {
         || getModelChatState() == .generating
         || getModelChatState() == .failed
         || getModelChatState() == .pendingImageUpload
+        || getModelChatState() == .starting
     }
 
     var isChattable: Bool {
@@ -70,6 +73,8 @@ final class ChatState: ObservableObject {
     var isResettable: Bool {
         return getModelChatState() == .ready
         || getModelChatState() == .generating
+        || getModelChatState() == .starting
+        
     }
     
     func requestResetChat() {
@@ -80,6 +85,19 @@ final class ChatState: ObservableObject {
             self?.mainResetChat()
         })
     }
+    
+    
+    func requestInterruptChat(callback: @escaping () -> Void) {
+        assert(isInterruptible)
+        interruptChat(prologue: {
+            switchToResetting()
+        }, epilogue: { [weak self] in
+            self?.mainInterruptChat()
+            callback()
+        })
+    }
+    
+    
     
     func requestTerminateChat(callback: @escaping () -> Void) {
         assert(isInterruptible)
@@ -107,18 +125,52 @@ final class ChatState: ObservableObject {
     }
     
     func requestGenerate(prompt: String) {
+        let feedback = UIImpactFeedbackGenerator(style: .light)
+        let mainFeedback = UIImpactFeedbackGenerator(style: .soft)
+        feedback.prepare()
+        mainFeedback.prepare()
+        
         assert(isChattable)
         switchToGenerating()
         appendMessage(role: .user, message: prompt)
         appendMessage(role: .bot, message: "")
+        
+        mainFeedback.impactOccurred()
+        
         threadWorker.push {[weak self] in
             guard let self else { return }
+//            var lastToken = Date()
             chatModule.prefill(prompt)
+            var lastText = ""
+
             while !chatModule.stopped() {
                 chatModule.decode()
+                
                 if let newText = chatModule.getMessage() {
                     DispatchQueue.main.async {
-                        self.updateMessage(role: .bot, message: newText)
+                        if lastText.isEmpty {
+                            feedback.impactOccurred()
+                            self.updateMessage(role: .bot, message: newText)
+                            lastText = newText
+                        }else if newText.hasPrefix(lastText) {
+                            let newStringIndex = newText.index(newText.startIndex, offsetBy: lastText.count)
+                            let newString = newText.suffix(from: newStringIndex)
+
+                            if newString.rangeOfCharacter(from: .punctuationCharacters) != nil {
+                                feedback.impactOccurred()
+                            } else if newString.contains(" ") {
+                                feedback.impactOccurred(intensity: 0.5)
+                            }
+                            self.updateMessage(role: .bot, message: newText)
+                            lastText = newText
+                        }else if(newText.isEmpty){
+                            self.requestInterruptChat {
+                                
+                            }
+                        }else{
+                            self.updateMessage(role: .bot, message: newText)
+                            lastText = newText
+                        }
                     }
                 }
 
@@ -126,6 +178,7 @@ final class ChatState: ObservableObject {
                     break
                 }
             }
+            mainFeedback.impactOccurred(intensity: 1.0)
             if getModelChatState() == .generating {
                 if let runtimeStats = chatModule.runtimeStatsText(useVision) {
                     DispatchQueue.main.async {
@@ -135,6 +188,15 @@ final class ChatState: ObservableObject {
                 }
             }
         }
+    }
+    
+    func requestInfoMessage(){
+        if self.infoText.isEmpty {
+            self.appendMessage(role: .bot, message: "No runtime stats available")
+        }else{
+            self.appendMessage(role: .bot, message: self.infoText)
+        }
+        
     }
 
     func requestProcessImage(image: UIImage) {
@@ -224,6 +286,7 @@ private extension ChatState {
         assert(isInterruptible)
         if getModelChatState() == .ready 
             || getModelChatState() == .failed
+            || getModelChatState() == .starting
             || getModelChatState() == .pendingImageUpload {
             prologue()
             epilogue()
@@ -258,6 +321,27 @@ private extension ChatState {
         }
     }
 
+    
+    func mainInterruptChat() {
+        threadWorker.push {[weak self] in
+            guard let self else { return }
+            chatModule.resetChat()
+            if useVision {
+                chatModule.resetImageModule()
+            }
+            DispatchQueue.main.async {
+//                self.clearHistory()
+                if self.useVision {
+                    self.appendMessage(role: .bot, message: "[System] Upload an image to chat")
+                    self.switchToPendingImageUpload()
+                } else {
+                    self.switchToReady()
+                }
+            }
+        }
+    }
+
+    
     func mainTerminateChat(callback: @escaping () -> Void) {
         threadWorker.push {[weak self] in
             guard let self else { return }
@@ -289,27 +373,32 @@ private extension ChatState {
         threadWorker.push {[weak self] in
             guard let self else { return }
             DispatchQueue.main.async {
-                self.appendMessage(role: .bot, message: "[System] Initalize...")
+//                self.appendMessage(role: .bot, message: "[System] Initalize...")
             }
             if prevUseVision {
                 chatModule.unloadImageModule()
             }
             chatModule.unload()
             let vRAM = os_proc_available_memory()
+//            let requiredMemory = String (
+//                format: "%.1fMB", Double(estimatedVRAMReq) / Double(1 << 20)
+//            )
+            print("Need ram: \(estimatedVRAMReq), available: \(vRAM)")
             if (vRAM < estimatedVRAMReq) {
-                let requiredMemory = String (
-                    format: "%.1fMB", Double(estimatedVRAMReq) / Double(1 << 20)
-                )
+                
                 let errorMessage = (
-                    "Sorry, the system cannot provide \(requiredMemory) VRAM as requested to the app, " +
-                    "so we cannot initialize this model on this device."
+                    "🐑 Ewe need more RAM 🐏\n\nUnfortunately Sheepy-T is a hungry hungry sheep-o, and only supports devices with 8GB of RAM such as the iPhone 15 Pro and Pro Max."
                 )
                 DispatchQueue.main.sync {
                     self.messages.append(MessageData(role: MessageRole.bot, message: errorMessage))
                     self.switchToFailed()
                 }
+                modelChatState = .failed
                 return
             }
+
+            
+            let startTime = CFAbsoluteTimeGetCurrent()
 
             if useVision {
                 // load vicuna model
@@ -324,16 +413,22 @@ private extension ChatState {
             } else {
                 chatModule.reload(modelLib, modelPath: modelPath, appConfigJson: "")
             }
+            
+            let elapsedTime = CFAbsoluteTimeGetCurrent() - startTime
+            print("Reload operation execution time: \(elapsedTime) seconds.")
 
             DispatchQueue.main.async {
                 if self.useVision {
                     self.updateMessage(role: .bot, message: "[System] Upload an image to chat")
                     self.switchToPendingImageUpload()
                 } else {
-                    self.updateMessage(role: .bot, message: "[System] Ready to chat")
+//                    self.updateMessage(role: .bot, message: "[System] Ready to chat")
                     self.switchToReady()
                 }
             }
+            
+            chatModule.processSystemPrompts()
+            
         }
     }
 }

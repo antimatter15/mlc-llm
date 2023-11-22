@@ -5,6 +5,32 @@
 
 import SwiftUI
 
+extension String {
+    func removePattern() -> String {
+        let pattern = "\\s*<(\\|(i(m(_(e(n(d(\\|>?)?)?)?)?)?)?)?)?$"
+        if let regex = try? NSRegularExpression(pattern: pattern, options: []) {
+            let range = NSRange(location: 0, length: self.utf16.count)
+            return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "")
+        }
+        return self
+    }
+    func removingTrailing() -> String {
+        let characterSet = CharacterSet(charactersIn: "\u{FFFD}")
+        var newString = self
+        while let last = newString.unicodeScalars.last, characterSet.contains(last) {
+            newString = String(newString.dropLast())
+        }
+        return newString
+    }
+    func removeLeading() -> String {
+        guard let index = firstIndex(where: { !CharacterSet(charactersIn: String($0)).isSubset(of: .whitespaces) }) else {
+            return self
+        }
+        return String(self[index...])
+    }
+}
+
+
 struct MessageView: View {
     let role: MessageRole;
     let message: String
@@ -17,17 +43,25 @@ struct MessageView: View {
             if role.isUser {
                 Spacer()
             }
-            Text(message)
-                .padding(10)
-                .foregroundColor(textColor)
-                .background(background)
-                .cornerRadius(10)
-                .textSelection(.enabled)
+            if message.isEmpty {
+                ProgressView()
+            } else {
+                Text(
+                    message.removePattern().removingTrailing()
+                        .removeLeading()
+                )
+                    .padding(10)
+                    .foregroundColor(textColor)
+                    .background(background)
+                    .cornerRadius(10)
+                    .textSelection(.enabled)
+            }
+            
             if !role.isUser {
                 Spacer()
             }
         }
-        .padding()
+        .padding(.horizontal)
         .listRowSeparator(.hidden)
     }
 }

@@ -1,15 +1,9 @@
-//
-//  MLCChatApp.swift
-//  MLCChat
-//
-//  Created by Tianqi Chen on 4/26/23.
-//
-
 import SwiftUI
 
 @main
 struct MLCChatApp: App {
     @StateObject private var appState = AppState()
+    @State private var isModelLoaded = false
 
     init() {
         UITableView.appearance().separatorStyle = .none
@@ -18,11 +12,14 @@ struct MLCChatApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StartView()
-                .environmentObject(appState)
-                .task {
+            // Use the first model's chatState to initialize ChatView
+            ChatView()
+                .environmentObject(appState.chatState)
+                .onAppear {
                     appState.loadAppConfigAndModels()
+                    appState.models.first!.startChat(chatState: appState.chatState)
                 }
+            
         }
     }
 }
